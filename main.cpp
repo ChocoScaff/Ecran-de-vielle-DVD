@@ -9,10 +9,10 @@ int main(int argc, char *argv[])
     int largeurDeLecran=1280,hauteurDeLecran=720,nombredecouleur=16;
     int hauteurLogo=178,largeurLogo=343;
     int vitesseX=1,vitesseY=1;
-    char rouge = 0,vert = 255,bleu = 0;
+    char rouge = 0,vert = 0,bleu = 0;
     int continuer=1;
-    SDL_Surface *ecran = NULL;
-    SDL_Surface *imageDeFond = NULL;
+    SDL_Surface *ecran = NULL; //pointeur pour l'écran de la fenêtre
+    SDL_Surface *logoDVD = NULL; //pointeur pour le logo du DVD
     SDL_Event event;
 
     SDL_Init(SDL_INIT_VIDEO); // Initialisation de la SDL
@@ -29,44 +29,41 @@ int main(int argc, char *argv[])
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, rouge, vert, bleu)); // Coloration de la surface ecran
 
     //image au fond
-    SDL_Rect logoDVD;
-    //SDL_SetAlpha(logoDVD, SDL_SRCALPHA, 128);
+    SDL_Rect positionLogoDVD;
 
-    logoDVD.x = largeurDeLecran/2-largeurLogo/2; //On met le logo au milieu de l'écran
-    logoDVD.y = hauteurDeLecran/2-hauteurLogo/2;
+    positionLogoDVD.x = largeurDeLecran/2-largeurLogo/2; //On met le logo au milieu de l'écran
+    positionLogoDVD.y = hauteurDeLecran/2-hauteurLogo/2;
 
     /* Chargement d'une image Bitmap dans une surface */
-    imageDeFond = SDL_LoadBMP("dvd.bmp");
-
+    logoDVD = SDL_LoadBMP("dvd.bmp");
 
     while(continuer)
     {
-        logoDVD.x=logoDVD.x+vitesseX;
-        logoDVD.y=logoDVD.y+vitesseY;
-        SDL_BlitSurface(imageDeFond, NULL, ecran, &logoDVD);
+        positionLogoDVD.x=positionLogoDVD.x+vitesseX;
+        positionLogoDVD.y=positionLogoDVD.y+vitesseY;
+        SDL_BlitSurface(logoDVD, NULL, ecran, &positionLogoDVD); // On met le Logo ou la le pointeur du DVD est situer
         SDL_Flip(ecran); // Mise à jour de l'écran avec sa nouvelle couleur
-        SDL_PollEvent(&event);
+        SDL_PollEvent(&event);  //On entre dans la boucle quand il y'a un évenement
         switch(event.type)
         {
-            case SDL_QUIT:
+            case SDL_QUIT: // Si l'évenment est de quitter le logiciel
                 continuer = 0;
-                //break;
         }
-        if (logoDVD.y == hauteurDeLecran-hauteurLogo)
+        if (positionLogoDVD.y == hauteurDeLecran-hauteurLogo)
         {
-            vitesseY=-1;
+            vitesseY=-1; //Vers le bas
         }
-        else if (logoDVD.y == 0)
+        else if (positionLogoDVD.y == 0)
         {
-            vitesseY=1;
+            vitesseY=1; //Vers le haut
         }
-        else if (logoDVD.x == 0)
+        else if (positionLogoDVD.x == 0)
         {
-            vitesseX=1;
+            vitesseX=1;//Vers la droite
         }
-        else if (logoDVD.x == largeurDeLecran-largeurLogo)
+        else if (positionLogoDVD.x == largeurDeLecran-largeurLogo)
         {
-            vitesseX=-1;
+            vitesseX=-1;//Vers la gauche
         }
     }
 
