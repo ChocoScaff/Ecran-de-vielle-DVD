@@ -7,9 +7,9 @@
 #define nombredecouleur 16
 #define hauteurLogo 178
 #define largeurLogo 343
-#define rouge 0
-#define vert 0
-#define bleu 0
+#define couleurDeFondRouge 0
+#define CouleurDeFondVert 0
+#define CouleurDeFondBleu 0
 
 void nomDeLaFenetre();
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
     nomDeLaFenetre(); //nom Afficher au dessus la fenêtre
 
-    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, rouge, vert, bleu)); // Coloration de la surface ecran
+    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, couleurDeFondRouge, CouleurDeFondVert, CouleurDeFondBleu)); // Coloration de la surface ecran RGB
 
     //image au fond
     SDL_Rect positionLogoDVD;
