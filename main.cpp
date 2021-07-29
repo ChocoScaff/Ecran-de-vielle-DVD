@@ -2,15 +2,22 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 
+#define largeurDeLecran 1280
+#define hauteurDeLecran 720
+#define nombredecouleur 16
+#define hauteurLogo 178
+#define largeurLogo 343
+#define rouge 0
+#define vert 0
+#define bleu 0
+
 void nomDeLaFenetre();
 
 int main(int argc, char *argv[])
 {
-    int largeurDeLecran=1280,hauteurDeLecran=720,nombredecouleur=16;
-    int hauteurLogo=178,largeurLogo=343;
     int vitesseX=1,vitesseY=1;
-    char rouge = 0,vert = 0,bleu = 0;
-    int continuer=1;
+    char continuer=1;
+
     SDL_Surface *ecran = NULL; //pointeur pour l'écran de la fenêtre
     SDL_Surface *logoDVD = NULL; //pointeur pour le logo du DVD
     SDL_Event event;
@@ -49,7 +56,7 @@ int main(int argc, char *argv[])
             case SDL_QUIT: // Si l'évenment est de quitter le logiciel
                 continuer = 0;
         }
-        if (positionLogoDVD.y == hauteurDeLecran-hauteurLogo)
+        if (positionLogoDVD.y == (hauteurDeLecran-hauteurLogo))
         {
             vitesseY=-1; //Vers le bas
         }
@@ -61,7 +68,7 @@ int main(int argc, char *argv[])
         {
             vitesseX=1;//Vers la droite
         }
-        else if (positionLogoDVD.x == largeurDeLecran-largeurLogo)
+        else if (positionLogoDVD.x == (largeurDeLecran-largeurLogo))
         {
             vitesseX=-1;//Vers la gauche
         }
