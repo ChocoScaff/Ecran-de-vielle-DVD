@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "sdl2.h"
 
+#define couleurRouge 0
+#define couleurVert 0
+#define couleurBleu 0
+
 const Uint8 *etatClavier;
 
 static SDL_Window *window = NULL;
@@ -40,7 +44,7 @@ Ecran creationEcran(void)
 
     SDL_RenderSetLogicalSize(ecran, X_SCREEN, Y_SCREEN);
 
-    SDL_SetRenderDrawColor(ecran, 0x00, 0x00, 0x00, 0xFF);
+    SDL_SetRenderDrawColor(ecran, couleurRouge, couleurVert, couleurBleu, 0xFF);
 
     return ecran;
 }
